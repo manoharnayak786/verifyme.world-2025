@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { MOCK_CREDENTIALS } from "@/data/credentials";
 import { MOCK_VERIFICATIONS } from "@/data/verifications";
 import { formatDate } from "@/lib/formatters";
-import { FileCheck, ShieldCheck, Clock, AlertTriangle, TrendingUp, Users } from "lucide-react";
+import { FileCheck, ShieldCheck, Clock, AlertTriangle, Users } from "lucide-react";
 import { Link } from "wouter";
 
 export default function DashboardOverview() {
