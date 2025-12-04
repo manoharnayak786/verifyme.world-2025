@@ -2,23 +2,37 @@ import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { UserRoleProvider } from "@/context/UserRoleContext";
 import NotFound from "@/pages/not-found";
 
-// Pages
-import Home from "@/pages/home";
-import Dashboard from "@/pages/dashboard";
-import Verify from "@/pages/verify";
-import Profile from "@/pages/profile";
+// New Routes
+import Landing from "@/routes/Landing";
+import AuthPage from "@/routes/AuthPage";
+import VerifyPage from "@/routes/VerifyPage";
+import DashboardOverview from "@/routes/DashboardOverview";
+import DashboardCredentials from "@/routes/DashboardCredentials";
+import DashboardAnalytics from "@/routes/DashboardAnalytics";
+import DashboardSettings from "@/routes/DashboardSettings";
+import DashboardVerify from "@/routes/DashboardVerify";
 
+// Router Component
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/verify" component={Verify} />
-      <Route path="/verify/:id" component={Verify} />
-      <Route path="/profile" component={Profile} />
+      {/* Public Routes */}
+      <Route path="/" component={Landing} />
+      <Route path="/auth" component={AuthPage} />
+      <Route path="/verify" component={VerifyPage} />
+      <Route path="/verify/:id" component={VerifyPage} />
+
+      {/* Dashboard Routes */}
+      <Route path="/dashboard" component={DashboardOverview} />
+      <Route path="/dashboard/credentials" component={DashboardCredentials} />
+      <Route path="/dashboard/verify" component={DashboardVerify} />
+      <Route path="/dashboard/analytics" component={DashboardAnalytics} />
+      <Route path="/dashboard/settings" component={DashboardSettings} />
+
+      {/* Fallback */}
       <Route component={NotFound} />
     </Switch>
   );
@@ -27,10 +41,10 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
+      <UserRoleProvider>
         <Toaster />
         <Router />
-      </TooltipProvider>
+      </UserRoleProvider>
     </QueryClientProvider>
   );
 }

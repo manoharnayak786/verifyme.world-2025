@@ -1,75 +1,107 @@
 import { Link, useLocation } from "wouter";
-import { ShieldCheck, Menu, X, LayoutDashboard, User, Search } from "lucide-react";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import logoSymbol from "@assets/generated_images/verifyme_logo_symbol.png";
+import { Menu, X, Globe, ShieldCheck } from "lucide-react";
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
-    { href: "/", label: "Home", icon: null },
-    { href: "/verify", label: "Verify Certificate", icon: Search },
-    { href: "/dashboard", label: "Issuer Dashboard", icon: LayoutDashboard },
-    { href: "/profile", label: "Student Profile", icon: User },
+    { href: "/", label: "Home" },
+    { href: "/verify", label: "Verify" },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <img src={logoSymbol} alt="VerifyMe Logo" className="h-8 w-8" />
-          <span className="font-heading text-xl font-bold tracking-tight text-primary">
-            VerifyMe<span className="text-foreground">.world</span>
+    <nav 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
+        scrolled ? "bg-background/80 backdrop-blur-md border-border" : "bg-transparent"
+      )}
+    >
+      <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center space-x-2 group cursor-pointer">
+          <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+            <Globe className="w-5 h-5 text-primary" />
+            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-accent rounded-full border-2 border-background"></div>
+          </div>
+          <span className="font-heading font-bold text-xl tracking-tight text-text-main">
+            VerifyMe<span className="text-primary">.world</span>
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex md:items-center md:space-x-6">
+        <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
-              <span
-                className={`cursor-pointer text-sm font-medium transition-colors hover:text-primary ${
-                  location === link.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                }`}
-              >
+              <span className={cn(
+                "text-sm font-medium cursor-pointer transition-colors hover:text-primary",
+                location === link.href ? "text-primary" : "text-text-muted"
+              )}>
                 {link.label}
               </span>
             </Link>
           ))}
-          <Link href="/dashboard">
-            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Get Started
-            </Button>
-          </Link>
+          
+          <div className="flex items-center space-x-4 ml-4 pl-4 border-l border-border">
+             <Link href="/verify">
+              <button className="text-sm font-medium text-text-main hover:text-white transition-colors">
+                Verify a credential
+              </button>
+            </Link>
+            <Link href="/auth">
+              <button className="px-4 py-2 rounded-full bg-primary hover:bg-primary-hover text-white text-sm font-medium transition-all shadow-lg shadow-primary/20">
+                Launch Demo
+              </button>
+            </Link>
+          </div>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden p-2 text-muted-foreground hover:text-foreground"
+        {/* Mobile Toggle */}
+        <button 
+          className="md:hidden p-2 text-text-muted hover:text-white"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden border-t bg-background p-4 space-y-4 animate-in slide-in-from-top-5">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <div 
-                className="flex items-center space-x-2 p-2 rounded-md hover:bg-muted cursor-pointer"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.icon && <link.icon size={18} />}
-                <span className="font-medium">{link.label}</span>
-              </div>
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-surface border-b border-border p-4 animate-in slide-in-from-top-5">
+          <div className="flex flex-col space-y-4">
+            {navLinks.map((link) => (
+              <Link key={link.href} href={link.href}>
+                <span 
+                  className="block p-2 text-base font-medium text-text-muted hover:text-white hover:bg-white/5 rounded-md cursor-pointer"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </span>
+              </Link>
+            ))}
+            <div className="h-px bg-border my-2"></div>
+            <Link href="/verify">
+              <span className="block p-2 text-base font-medium text-text-muted hover:text-white cursor-pointer" onClick={() => setIsOpen(false)}>
+                Verify a credential
+              </span>
             </Link>
-          ))}
+            <Link href="/auth">
+              <span className="block w-full text-center p-3 rounded-lg bg-primary text-white font-medium cursor-pointer" onClick={() => setIsOpen(false)}>
+                Launch Demo
+              </span>
+            </Link>
+          </div>
         </div>
       )}
     </nav>

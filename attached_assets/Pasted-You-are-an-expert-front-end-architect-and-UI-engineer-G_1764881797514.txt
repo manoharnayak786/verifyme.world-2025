@@ -1,0 +1,331 @@
+You are an expert front-end architect and UI engineer.
+
+GOAL:
+Build the **complete frontend UI/UX** for a product called **VerifyMe.world** – a global, blockchain-inspired credential verification platform. For now we ONLY care about frontend with **dummy data**. No real backend, no real auth – but everything should LOOK and FEEL like a polished, production SaaS.
+
+CONTEXT:
+- Tech stack:
+  - React + TypeScript
+  - Vite as the build tool (or the default React+TS template if Vite is not available in this environment)
+  - Tailwind CSS for styling
+  - React Router for navigation
+- Architecture:
+  - Clean folder structure with reusable components
+  - A simple global state for the "current user role" (e.g., via React Context or a lightweight store like Zustand)
+  - Dummy data for credentials, institutions, and verifications, stored locally in TS files
+
+================================================================================
+1) PROJECT STRUCTURE
+================================================================================
+
+Create a structure similar to:
+
+- src/
+  - main.tsx
+  - App.tsx
+  - routes/
+    - Landing.tsx
+    - VerifyPage.tsx
+    - AuthPage.tsx
+    - DashboardLayout.tsx
+    - DashboardOverview.tsx
+    - DashboardCredentials.tsx
+    - DashboardVerify.tsx
+    - DashboardAnalytics.tsx
+    - DashboardSettings.tsx
+  - components/
+    - layout/
+      - Navbar.tsx
+      - Footer.tsx
+      - Sidebar.tsx
+      - PageShell.tsx
+    - ui/
+      - Button.tsx
+      - Badge.tsx
+      - Card.tsx
+      - StatCard.tsx
+      - Table.tsx
+      - Tag.tsx
+      - Tabs.tsx
+      - Input.tsx
+      - Select.tsx
+      - Pill.tsx
+      - EmptyState.tsx
+      - Timeline.tsx
+    - verify/
+      - VerifySearchBox.tsx
+      - VerifyResultCard.tsx
+    - credentials/
+      - CredentialCard.tsx
+      - CredentialStatusPill.tsx
+  - context/
+    - UserRoleContext.tsx
+  - data/
+    - credentials.ts
+    - institutions.ts
+    - verifications.ts
+  - styles/
+    - tailwind.css (or index.css where Tailwind is wired)
+  - lib/
+    - formatters.ts (helpers for dates, status labels, etc.)
+
+Configure Tailwind properly with the React app.
+
+================================================================================
+2) BRANDING, THEME & COLORS
+================================================================================
+
+Implement a **modern, global, trustworthy** visual language.
+
+Tailwind config:
+- Use these as base theme colors:
+  - background: #030712
+  - surface: #020617 / #0B1120
+  - primary: #3B82F6
+  - accent: #22C55E
+  - warning: #F97316
+  - text-main: #F9FAFB
+  - text-muted: #9CA3AF
+  - border-subtle: #1F2937
+
+General style guidelines:
+- Dark theme by default with plenty of contrast.
+- Use subtle gradients in hero sections, such as:
+  - from-primary/40 to-accent/30
+- Rounded corners (md to xl), soft shadows, and glassmorphism-like panels for hero + dashboard cards.
+- Use a clean, geometric sans-serif font (e.g., Tailwind default system font is fine).
+- Plenty of whitespace and breathing room.
+
+The UI should look like a serious global SaaS (think Stripe / Vercel level cleanliness), with a **Web3/security** vibe but NOT cheesy.
+
+================================================================================
+3) ROUTES & PAGE FLOWS
+================================================================================
+
+Use React Router to define at least these routes:
+- "/"           → Landing page
+- "/verify"     → Public verification page
+- "/auth"       → Fake login/register + role selection
+- "/dashboard"  → Main dashboard layout with nested views
+
+----------------------------------
+3.1 Landing Page ("/")
+----------------------------------
+Components:
+- Top navbar:
+  - Logo (text: "VerifyMe.world" with subtle accent dot)
+  - Nav links: "How it works", "Use cases", "Verify", "Dashboard"
+  - Right side CTA buttons: ["Verify a credential", "Launch demo"]
+
+Sections:
+1) Hero:
+   - Headline: “The global standard for tamper-proof credentials.”
+   - Subheadline: Short 2-line explanation of instant verification for degrees, certificates, achievements.
+   - Primary CTA: “Launch live demo”
+   - Secondary CTA: “Verify a credential”
+   - Background: modern gradient + subtle globe / grid styling using CSS.
+   - Include a “demo card” mock UI showing:
+     - Example credential: “Jane Doe — B.Sc Computer Science — Global University — Issued 2024-06-01 — Status: Verified (On-chain demo)”
+
+2) How it works:
+   - 3 steps with icons:
+     - Issue → Share → Verify
+   - Each step is a Card component with title, icon placeholder, and short text.
+
+3) Who it’s for:
+   - 3 columns:
+     - Students & Professionals
+     - Universities & EdTech
+     - Employers & Recruiters
+
+4) Trust & Stats:
+   - StatCards: show dummy numbers (e.g., 12K+ credentials, 80+ countries, <3s verification time).
+
+5) Footer:
+   - Links: Docs, Privacy, Terms, Contact, “View demo”.
+
+----------------------------------
+3.2 Verification Page ("/verify")
+----------------------------------
+Purpose: Public search and verify, **no login required**, all dummy.
+
+UI:
+- Centered search box:
+  - Label: “Verify a credential”
+  - Input placeholder: “Enter credential ID / URL / hash…”
+  - Button: “Verify”
+- Below input:
+  - Some “Example IDs” as clickable chips that trigger searches using dummy data.
+- Results area:
+  - If no search yet: show EmptyState with short explainer and "Try a demo credential".
+  - If search found: show `VerifyResultCard` with:
+    - Name, institution name, credential title (e.g., “Postgraduate Diploma in Data Science”)
+    - Issued date
+    - Status pill (Valid / Revoked / Expired / Unknown)
+    - “Issued by” with dummy institution logo initials
+    - “Verification events”: last verified timestamp list (dummy).
+  - If not found: show error state explaining possible reasons.
+
+----------------------------------
+3.3 Auth Page ("/auth")
+----------------------------------
+This is NOT real auth. It is a UX layer to simulate roles.
+
+UI:
+- Tabs: “Login” | “Sign up” (purely visual).
+- Main content:
+  - Dropdown/Select: “Choose your role”
+    - Options:
+      - “Learner / Candidate”
+      - “Institution / Issuer”
+      - “Recruiter / Verifier”
+  - Email input (for feel)
+  - Password input (for feel)
+  - Button: “Continue to demo dashboard”
+- On click:
+  - Store the chosen role in a global context: `userRole` = "learner" | "issuer" | "verifier".
+  - Redirect to `/dashboard`.
+
+----------------------------------
+3.4 Dashboard Layout ("/dashboard")
+----------------------------------
+Use a main layout with:
+- Sidebar on the left (collapsible on mobile)
+  - Logo at top
+  - Navigation items:
+    - Overview
+    - Credentials
+    - Verify
+    - Analytics (only visible for issuer role)
+    - Settings
+  - At bottom: user role tag and “Switch role” link (go back to `/auth`).
+- Content area on the right
+  - Top bar: page title, optional actions, and fake avatar.
+
+Implement nested routes OR conditional rendering inside `/dashboard`:
+
+Views to implement:
+
+1) Overview:
+   - Show different content depending on `userRole`.
+   - For learner:
+     - “My credentials” summary: total count, last updated, upcoming expiry.
+     - Timeline of a few events (issued, verified by company, shared).
+   - For issuer:
+     - StatCards: Total issued, Verified this week, Revoked, Active institutions.
+   - For verifier:
+     - Recent verifications list with names, institutions, result (pass/fail).
+
+2) Credentials:
+   - Table or grid view depending on role.
+   - For learner:
+     - Grid of CredentialCards with:
+       - Title, institution, level, issued date, status.
+   - For issuer:
+     - Table:
+       - Columns: Holder name, Credential title, Institution, Issued on, Status.
+       - Basic sorting by columns (client-side with dummy data).
+   - Provide filter chips: Status (All / Valid / Revoked / Expired).
+
+3) Verify (inside dashboard):
+   - Similar to `/verify` but tailored to the active role.
+   - For verifier:
+     - Inline search box + recent history list (dummy).
+
+4) Analytics (issuer role only):
+   - Use StatCards and simple charts (could be lightweight e.g., fake bars using divs).
+   - Stats like:
+     - Credentials issued over time (dummy monthly data).
+     - Top programs issued.
+     - Top geographies.
+
+5) Settings:
+   - General info:
+     - Organization/Name, Role, Timezone, Preferred verification method (dummy dropdown).
+   - Theme toggle: (still dark-only, but add a placeholder toggle).
+   - Button: “Reset demo data” (just resets local state to default).
+
+================================================================================
+4) DUMMY DATA
+================================================================================
+
+Create dummy data in `src/data/`:
+
+- `credentials.ts`:
+  - Array of credential objects with fields:
+    - id
+    - holderName
+    - title
+    - institutionId
+    - issuedAt
+    - expiresAt (optional)
+    - status: "valid" | "revoked" | "expired" | "pending"
+    - country
+    - onChain: boolean
+
+- `institutions.ts`:
+  - Array of institution objects:
+    - id
+    - name
+    - slug
+    - country
+    - logoInitials (e.g. "GU", "NYU")
+    - type: "university" | "bootcamp" | "mooc" | "certification-body"
+
+- `verifications.ts`:
+  - Array of verification events:
+    - id
+    - credentialId
+    - verifiedBy (company/institution name)
+    - verifiedAt
+    - result: "success" | "failed"
+    - location (city, country)
+
+Use varied, realistic dummy names and global locations so it feels international.
+
+================================================================================
+5) GLOBAL STATE (USER ROLE + DEMO MODE)
+================================================================================
+
+Create a `UserRoleContext`:
+- value:
+  - `userRole: "learner" | "issuer" | "verifier" | null`
+  - `setUserRole(role)`
+- Provide this at the root level (around `<App />`).
+
+`/auth` page:
+- On selecting role + hitting Continue:
+  - Call `setUserRole(...)`.
+  - Navigate to `/dashboard`.
+
+Dashboard:
+- If `userRole` is null, redirect back to `/auth`.
+
+================================================================================
+6) UX DETAILS, RESPONSIVENESS & QUALITY
+================================================================================
+
+- All pages must be fully responsive:
+  - Mobile-first layout with stacked sections.
+  - Sidebar collapses into a top menu or icon-only bar.
+- Use semantic HTML and accessible ARIA where appropriate.
+- Use consistent spacing scale and typography across pages.
+- Buttons must have hover, focus, and active states.
+- Status pills have consistent colors:
+  - Valid: accent green (#22C55E)
+  - Revoked: warning (#F97316) or red (#EF4444)
+  - Expired: muted amber
+  - Pending: gray/blue.
+
+================================================================================
+7) DELIVERABLE
+================================================================================
+
+At the end, ensure:
+- The app compiles and runs with a single `npm run dev` (or equivalent).
+- All routes are wired and navigable via navbar / buttons.
+- The dashboard shows clearly different experiences for learner / issuer / verifier.
+- There is NO backend, NO real auth, and NO external API calls.
+- Everything uses dummy data but looks like a **global, investment-ready, production-quality UI** for VerifyMe.world.
+
+Now, scaffold and implement all of this in this project.
