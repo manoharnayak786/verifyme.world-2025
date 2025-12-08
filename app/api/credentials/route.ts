@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
       holderName: data.holderName,
       title: data.title,
       institutionId: data.institutionId,
-      issueDate: new Date(data.issueDate),
+      issuedAt: new Date(data.issueDate),
       expiresAt: data.expirationDate ? new Date(data.expirationDate) : null,
       status: 'valid',
       country: data.country,
