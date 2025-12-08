@@ -1,27 +1,27 @@
 [
   {
     "content": "Phase 2: Bootstrap Next.js 15 app with App Router, TypeScript, Tailwind, shadcn/ui",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Phase 2: Set up Drizzle ORM + PostgreSQL with enhanced schema (pdf_base64, hash, blockchain_events)",
-    "status": "in_progress"
-  },
-  {
-    "content": "Phase 2: Implement NextAuth with Credentials Provider and role-based auth",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: Create services - PDF generation, QR codes, blockchain simulation, AI helpers",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: Build API routes - auth, institutions, credentials, verifications, analytics, AI",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: Build landing page with sections - Hero, How it Works, Pricing, Features",
-    "status": "pending"
+    "status": "completed"
+  },
+  {
+    "content": "Phase 2: Implement NextAuth with Credentials Provider and role-based auth",
+    "status": "in_progress"
   },
   {
     "content": "Phase 2: Build dashboard - Overview, Credentials, Verify, Analytics (role-based)",
@@ -37,22 +37,6 @@
   },
   {
     "content": "Phase 2: Implement certificate issuance with AI-suggested templates",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 2: Add seed data script for demo institutions and credentials",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 2: Testing - Call testing_agent_v3 for comprehensive E2E validation",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 2: Fix all issues found during testing",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 2: Prepare for Vercel deployment - environment variables, build optimization",
     "status": "pending"
   }
 ]
