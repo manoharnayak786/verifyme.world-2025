@@ -1,18 +1,34 @@
 [
   {
+    "content": "Phase 1: Core POC - Create test_core.ts to validate AI (Emergent LLM), DB (PostgreSQL), PDF+QR generation, and simulated blockchain",
+    "status": "completed"
+  },
+  {
     "content": "Phase 1: Test AI integration - Call OpenAI via Emergent LLM key for certificate template generation",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Phase 1: Test DB connectivity - Connect to PostgreSQL and verify schema operations",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Phase 1: Test PDF+QR generation - Generate certificate PDF with embedded QR code using pdf-lib and qrcode",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Phase 1: Test simulated blockchain - Store and retrieve hash + transaction events",
-    "status": "in_progress"
+    "status": "completed"
+  },
+  {
+    "content": "Phase 1: Verify all POC tests pass consistently - Run test_core.ts multiple times",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 2: Bootstrap Next.js 15 app with App Router, TypeScript, Tailwind, shadcn/ui",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: Set up Drizzle ORM + PostgreSQL with enhanced schema (pdf_base64, hash, blockchain_events)",
+    "status": "pending"
   }
 ]
