@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from '@/client/src/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Shield, LayoutDashboard, FileText, Search, BarChart3, Settings, LogOut } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {

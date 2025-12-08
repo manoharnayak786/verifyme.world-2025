@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { Button } from '@/client/src/components/ui/button';
-import { Card, CardContent } from '@/client/src/components/ui/card';
-import { Badge } from '@/client/src/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, Shield, Zap, Globe, Users, FileCheck } from 'lucide-react';
 
 export default function LandingPage() {

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Shield, Code, Key, CheckCircle, FileText } from 'lucide-react';
-import { Button } from '@/client/src/components/ui/button';
-import { Card, CardContent } from '@/client/src/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function DocsPage() {
   return (

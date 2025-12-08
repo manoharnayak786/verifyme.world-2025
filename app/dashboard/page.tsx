@@ -1,7 +1,7 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/client/src/components/ui/card';
-import { Badge } from '@/client/src/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { FileText, CheckCircle2, XCircle, Clock } from 'lucide-react';
 
 export default function DashboardPage() {

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Shield } from 'lucide-react';
-import { Button } from '@/client/src/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 export default function TermsPage() {
   return (
