@@ -1,38 +1,14 @@
 [
   {
-    "content": "Phase 2: Implement NextAuth with Credentials Provider and role-based auth",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 2: Build dashboard - Overview, Credentials, Verify, Analytics (role-based)",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 2: Create legal pages - Privacy Policy, Terms of Service, Cookie Policy, Compliance",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 2: Create resource pages - Documentation, API Reference, Community, Help Center",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 2: Implement certificate issuance with AI-suggested templates",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 2: Add seed data script for demo institutions and credentials",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 2: Prepare for Vercel deployment - environment variables, build optimization",
-    "status": "completed"
-  },
-  {
     "content": "Phase 2: Run database migrations and test the application",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: Testing - Call testing_agent_v3 for comprehensive E2E validation",
     "status": "pending"
+  },
+  {
+    "content": "Phase 2: All user stories covered in Development",
+    "status": "completed"
   }
 ]
